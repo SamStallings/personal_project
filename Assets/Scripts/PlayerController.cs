@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public bool gameOver = false;
+    public bool gameOver;
 
     public float elevForce;
     private float levelModifier = 1.5f;
-    private float topLimit = 5.0f;
-    private float speed = 10.0f;
+    private float topLimit = 12.0f;
+    private float bottomLimit = 5.0f;
+    private float speed = 5.0f;
 
     private Rigidbody playerRb;
 
@@ -37,16 +38,20 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         // While space is pressed and player is low enough, elevate up
-        if (Input.GetKey(KeyCode.Space) && gameOver != true)
+        if (Input.GetKey(KeyCode.Space) && gameObject.transform.position.y < 16 && !gameOver)
         {
-            transform.Translate(Vector3.up * Time.deltaTime * speed);
-            playerRb.AddForce(Vector3.up * elevForce, ForceMode.Impulse);
+            playerRb.AddForce(Vector3.up * elevForce, ForceMode.Acceleration);
         }
         if (transform.position.y > topLimit)
         {
             transform.position = new Vector3(transform.position.x, topLimit, transform.position.z);
             playerRb.velocity = Vector3.zero;
-            playerRb.angularVelocity = Vector3.zero;
+            // playerRb.angularVelocity = Vector3.zero;
+        }
+        if (transform.position.y <= bottomLimit)
+        {
+            transform.position = new Vector3(transform.position.x, bottomLimit, transform.position.z);
+            playerRb.velocity = Vector3.zero;
         }
     }
     private void OnCollisionEnter(Collision other)
