@@ -8,6 +8,8 @@ TagManager:
   - Enemy
   - Laser
   - PowerUp
+  - PlayerGate
+  - Powerup
   layers:
   - Default
   - TransparentFX

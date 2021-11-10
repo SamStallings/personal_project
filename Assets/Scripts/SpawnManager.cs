@@ -2,34 +2,64 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpawnManagerX : MonoBehaviour
+public class SpawnManager : MonoBehaviour
 {
-    public GameObject[] objectPrefabs;
-    public GameObject obstaclePrefab;
-    private float spawnDelay = 2;
-    private float spawnInterval = 1.5f;
-    private Vector3 spawnPos = new Vector3(25, 0, 0);
-    private PlayerController playerControllerScript;
+
+    public GameObject powerupPrefab;
+    public GameObject enemyPrefab;
+
+    private float spawnRangeX = 10.0f;
+    private float spawnYMin = 5.0f;
+    private float spawnYMax = 15.0f;
+
+    public int enemyCount;
+    public int waveCount = 1;
+
+    public GameObject player;
 
     // Start is called before the first frame update
     void Start()
     {
-        InvokeRepeating("SpawnObjects", spawnDelay, spawnInterval);
-        playerControllerScript = GameObject.Find("Player").GetComponent<PlayerController>();
+        
     }
 
-    // Spawn obstacles
-    void SpawnObjects()
+    // Update is called once per frame
+    void Update()
     {
-        // Set random spawn location and random object index
-        Vector3 spawnLocation = new Vector3(30, Random.Range(5, 15), 0);
-        int index = Random.Range(0, objectPrefabs.Length);
+        enemyCount = GameObject.FindGameObjectsWithTag("Enemy").Length;
 
-        // If game is still active, spawn new object
-        if (!playerControllerScript.gameOver)
+        if (enemyCount == 0)
         {
-            Instantiate(objectPrefabs[index], spawnLocation, objectPrefabs[index].transform.rotation);
+            SpawnEnemyWave(waveCount);
+        }
+    }
+
+    //Spawn randomly on platforms
+    Vector3 GenerateSpawnPosition()
+    {
+        float yPos = Random.Range(spawnYMin, spawnYMax);
+        float xPos = Random.Range(-spawnRangeX, spawnRangeX);
+        return new Vector3(xPos, yPos, 3.5f);
+    }
+
+    void SpawnEnemyWave(int enemiesToSpawn)
+    {
+        Vector3 powerupSpawnOffset = new Vector3(0, 0, 15); // make powerups spawn at the opposite end
+
+        //spawn one powerup if there aren't any
+        if (GameObject.FindGameObjectsWithTag("Powerup").Length == 0) ; // check for no powerups
+        {
+            Instantiate(powerupPrefab, GenerateSpawnPosition() + powerupSpawnOffset, powerupPrefab.transform.rotation);
         }
 
+        // spawn enemy robots depending on wave order
+        for (int i = 0; i < enemiesToSpawn; i++)
+        {
+            Instantiate(enemyPrefab, GenerateSpawnPosition(), enemyPrefab.transform.rotation);
+        }
+
+        waveCount++;
+
+        enemyPrefab.GetComponent<Enemy>().enemySpeed += 2;
     }
 }
