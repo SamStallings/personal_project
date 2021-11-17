@@ -8,7 +8,8 @@ MonoImporter:
       type: 3}
   - enemyPrefab: {fileID: 4224970521416527029, guid: 0b5fb20255baf0d44b88396a98d76e7f,
       type: 3}
-  - player: {instanceID: 0}
+  - player: {fileID: 7956598214012624485, guid: 184e53bc1a5924a47abd3be04a8acc79,
+      type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
