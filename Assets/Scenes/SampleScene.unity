@@ -531,7 +531,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 684515805}
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -25, y: 30.9, z: 5}
+  m_LocalPosition: {x: -25, y: 39.8, z: 5}
   m_LocalScale: {x: 23.15815, y: 1, z: 5.3774}
   m_Children: []
   m_Father: {fileID: 0}
@@ -768,6 +768,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1712603170}
   - component: {fileID: 1712603171}
+  - component: {fileID: 1712603172}
   m_Layer: 0
   m_Name: Stars Small_1
   m_TagString: Untagged
@@ -837,6 +838,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1712603172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1712603169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8e2950d5ce6dd44c971a8c0a89e06b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 0.1
 --- !u!1 &1718711254
 GameObject:
   m_ObjectHideFlags: 0

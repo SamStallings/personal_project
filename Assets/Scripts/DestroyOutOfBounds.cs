@@ -6,7 +6,7 @@ public class DestroyOutOfBounds : MonoBehaviour
 {
     private PlayerController playerControllerScript;
     private float rightBound = 30;
-    private float leftBound = -15;
+    private float leftBound = -50;
     private float speed = 30;
     // Start is called before the first frame update
     void Start()
